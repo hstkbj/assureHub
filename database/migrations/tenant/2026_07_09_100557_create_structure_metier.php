@@ -26,7 +26,7 @@ return new class extends Migration
 
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('agence_id')->constrained('agences')->onDelete('cascade');
+            $table->foreignId('agence_id')->nullable()->constrained('agences')->onDelete('cascade');
             $table->string('nom');
             $table->string('prenom');
             $table->string('email')->unique();
@@ -78,7 +78,7 @@ return new class extends Migration
             $table->enum('frequence_paiement', ['journalier', 'hebdomadaire', 'mensuel','enBloc'])->default('mensuel'); // journalier / hebdomadaire / mensuel
             $table->decimal('montant_total', 12, 2);
             $table->decimal('montant_paye_cumule', 12, 2)->default(0);
-            $table->enum('statut', ['enCours', 'enAttente', 'enRetard', 'enPause', ])->default('enCours');
+            $table->enum('statut', ['enCours', 'enAttente', 'enRetard', 'enPause', 'solder' ])->default('enCours');
             $table->timestamps();
 
             $table->index(['statut', 'date_fin']);

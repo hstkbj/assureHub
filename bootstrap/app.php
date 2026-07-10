@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'tenant.api' => \App\Http\Middleware\IdentifyTenantApi::class,
+            'admin.plateforme' => \App\Http\Middleware\EnsureAdminPlateforme::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
