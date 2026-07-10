@@ -24,6 +24,30 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('nom')->unique();
+            $table->text('description')->nullable();
+        });
+
+        Schema::create('grille_tarifs', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('categorie_id')->constrained('categories');
+            $table->unsignedInteger('cv_min');
+            $table->unsignedInteger('cv_max');
+            $table->string('carburant',20);
+            $table->string('type_client',30);
+            $table->string('duree',20);
+            $table->string('place')->nullable();
+            $table->string('poids')->nullable();
+            $table->decimal('montant', 12, 2);
+            $table->date('date_debut_validite')->default(now());
+            $table->date('date_fin_validite')->nullable();
+            $table->timestamps();
+
+            $table->index(['categorie_id', 'carburant', 'type_client', 'duree', 'cv_min', 'cv_max'], 'idx_tarifs_recherche');
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('agence_id')->nullable()->constrained('agences')->onDelete('cascade');
@@ -162,6 +186,8 @@ return new class extends Migration
         Schema::dropIfExists('assurances');
         Schema::dropIfExists('clients');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('grille_tarifs');
+        Schema::dropIfExists('categories');
         Schema::dropIfExists('agences');
     }
 };

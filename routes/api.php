@@ -14,8 +14,8 @@ use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\Central\PlanController;
 use App\Http\Controllers\Central\AbonnementController;
 use App\Http\Controllers\Central\AdminPlateformeController;
-use App\Http\Controllers\Central\CategorieController as CentralCategorieController;
-use App\Http\Controllers\Central\GrilleTarifController as CentralGrilleTarifController;
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\GrilleTarifController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -67,8 +67,8 @@ Route::prefix('v1')
             // Catégories / grille tarifaire — PROPRES à cette entreprise.
             // Lecture pour tous les rôles, écriture réservée à admin_entreprise
             // (vérifié à l'intérieur des contrôleurs).
-            Route::apiResource('categories', CentralCategorieController::class);
-            Route::apiResource('grille-tarifs', CentralGrilleTarifController::class);
+            Route::apiResource('categories', CategorieController::class);
+            Route::apiResource('grille-tarifs', GrilleTarifController::class);
 
             // Abonnement de CETTE entreprise à un plan SaaS (self-service)
             Route::get('mon-abonnement', [AbonnementController::class, 'monAbonnement']);
