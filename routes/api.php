@@ -11,7 +11,7 @@ use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\RappelController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ActivityLogController;
-use App\Http\Controllers\Central\AbonnementController;
+use App\Http\Controllers\AbonnementController;
 use App\Http\Controllers\Central\PlanController;
 use App\Http\Controllers\Central\AbonnementController as CentralAbonnementController;
 use App\Http\Controllers\Central\AdminPlateformeController;
