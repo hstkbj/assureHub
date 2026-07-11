@@ -11,8 +11,9 @@ use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\RappelController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\ActivityLogController;
-use App\Http\Controllers\Central\PlanController;
 use App\Http\Controllers\Central\AbonnementController;
+use App\Http\Controllers\Central\PlanController;
+use App\Http\Controllers\Central\AbonnementController as CentralAbonnementController;
 use App\Http\Controllers\Central\AdminPlateformeController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\GrilleTarifController;
@@ -43,7 +44,7 @@ Route::prefix('v1/central')->group(function () {
         // Gestion des plans (création/modification/désactivation) + supervision
         // des abonnements de TOUTES les entreprises — réservé à l'admin plateforme.
         Route::apiResource('plans', PlanController::class)->except(['index', 'show']);
-        Route::apiResource('abonnements', AbonnementController::class)->only(['index', 'show', 'update']);
+        Route::apiResource('abonnements', CentralAbonnementController::class)->only(['index', 'show', 'update']);
     });
 });
 
