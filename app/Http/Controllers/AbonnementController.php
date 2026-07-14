@@ -30,7 +30,7 @@ class AbonnementController extends Controller
         }
 
         $validated = $request->validate([
-            'plan_id'     => 'required|exists:plans,id',
+            'plan_id'     => 'required|exists:central.plans,id',
             'periodicite' => 'required|in:mensuel,annuel',
         ]);
 

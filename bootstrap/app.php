@@ -17,6 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'tenant.api' => \App\Http\Middleware\IdentifyTenantApi::class,
             'admin.plateforme' => \App\Http\Middleware\EnsureAdminPlateforme::class,
         ]);
+
+        $middleware->prependToPriorityList(
+            \Illuminate\Contracts\Auth\Middleware\AuthenticatesRequests::class,
+            \App\Http\Middleware\IdentifyTenantApi::class,
+        );
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
